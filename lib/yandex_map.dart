@@ -1,4 +1,5 @@
 import 'package:yandex_mapkit/yandex_mapkit.dart';
+export 'package:yandex_mapkit/yandex_mapkit.dart';
 
 class YandexMapPlacemarkObj {
   final int placemarkObjId;
