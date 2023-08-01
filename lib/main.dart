@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
+import 'yandex_map.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -11,79 +13,60 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MapObject mapObj = MapObjectCollection(
-        mapId: const MapObjectId('map_obj'),
-        mapObjects: [
-          PlacemarkMapObject(
-              mapId: const MapObjectId('map_obj_1'),
-              point: const Point(
-                latitude: 55.75124,
-                longitude: 37.618423,
-              ),
-              opacity: 0.8,
-              icon: PlacemarkIcon.single(
-                  PlacemarkIconStyle(
-                    image: BitmapDescriptor.fromAssetImage(
-                        'lib/assets/place.png'
-                    ),
-                    scale: 1
-                  )
-              )
-          )
-        ]
+    // Placemark Objects
+    var placemarkObj1 = YandexMapPlacemarkObj(
+      placemarkObjId: 1,
+      placemarkObjPoint: const Point(latitude: 55.75124, longitude: 37.618423),
+      opacity: 0.8,
+      iconPath: 'lib/assets/place.png',
+      iconScale: 1,
     );
 
-    final List<MapObject> mapObjects = [mapObj];
+    var placemarkObj2 = YandexMapPlacemarkObj(
+      placemarkObjId: 2,
+      placemarkObjPoint: const Point(latitude: 55.74524, longitude: 37.618423),
+      opacity: 0.8,
+      iconPath: 'lib/assets/place.png',
+      iconScale: 1,
+    );
+
+    var placemarkObj3 = YandexMapPlacemarkObj(
+      placemarkObjId: 3,
+      placemarkObjPoint: const Point(latitude: 55.74824, longitude: 37.621423),
+      opacity: 0.8,
+      iconPath: 'lib/assets/place.png',
+      iconScale: 1,
+    );
+
+    final yandexMapService = YandexMapService(
+        placemarkObjects: [placemarkObj1, placemarkObj2, placemarkObj3]
+    );
+    // ---
+
+
+    // Camera Position
+    final cameraPosition = CameraObject(
+        cameraObjPoint: const Point(latitude: 55.751244, longitude: 37.618423),
+        zoom: 14
+    ).createCamera();
+    // ---
+
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('Yandex Maps Example')),
         body: YandexMap(
-
             onMapCreated: (YandexMapController yandexMapController) {
               yandexMapController.moveCamera(
                 animation: const MapAnimation(
-                    type: MapAnimationType.linear, duration: 1),
-                CameraUpdate.newCameraPosition(
-                  const CameraPosition(
-                    target: Point(
-                      latitude: 55.751244,
-                      longitude: 37.618423,
-                    ),
-                    zoom: 13,
-                  ),
+                    type: MapAnimationType.linear, duration: 1
                 ),
+
+                CameraUpdate.newCameraPosition(cameraPosition),
               );
             },
 
-            mapObjects: mapObjects
-          // Add two points near the center of Moscow
-          // yandexMapController.addPlacemark(
-          //   Placemark(
-          //     point: Point(
-          //       latitude: 55.751244 + 0.01,
-          //       longitude: 37.618423 + 0.01,
-          //     ),
-          //     style: const PlacemarkStyle(
-          //       iconName: 'lib/assets/place.png', // Replace 'place.png' with your image asset.
-          //       scale: 2.0,
-          //     ),
-          //   ),
-          // );
-          //
-          // yandexMapController.addPlacemark(
-          //   Placemark(
-          //     point: Point(
-          //       latitude: 55.751244 - 0.01,
-          //       longitude: 37.618423 - 0.01,
-          //     ),
-          //     style: const PlacemarkStyle(
-          //       iconName: 'lib/assets/place.png', // Replace 'place.png' with your image asset.
-          //       scale: 2.0,
-          //     ),
-          //   ),
-          // );
-          // }
+            mapObjects: yandexMapService.mapObjects
         ),
       ),
     );
