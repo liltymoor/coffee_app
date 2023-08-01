@@ -12,61 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Placemark Objects
-    var placemarkObj1 = YandexMapPlacemarkObj(
-      placemarkObjId: 1,
-      placemarkObjPoint: const Point(latitude: 55.75124, longitude: 37.618423),
-      opacity: 0.8,
-      iconPath: 'lib/assets/place.png',
-      iconScale: 1,
-    );
-
-    var placemarkObj2 = YandexMapPlacemarkObj(
-      placemarkObjId: 2,
-      placemarkObjPoint: const Point(latitude: 55.74524, longitude: 37.618423),
-      opacity: 0.8,
-      iconPath: 'lib/assets/place.png',
-      iconScale: 1,
-    );
-
-    var placemarkObj3 = YandexMapPlacemarkObj(
-      placemarkObjId: 3,
-      placemarkObjPoint: const Point(latitude: 55.74824, longitude: 37.621423),
-      opacity: 0.8,
-      iconPath: 'lib/assets/place.png',
-      iconScale: 1,
-    );
-
-    final yandexMapService = YandexMapService(
-        placemarkObjects: [placemarkObj1, placemarkObj2, placemarkObj3]
-    );
-    // ---
-
-
-    // Camera Position
-    final cameraPosition = CameraObject(
-        cameraObjPoint: const Point(latitude: 55.751244, longitude: 37.618423),
-        zoom: 14
-    ).createCamera();
-    // ---
-
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('Yandex Maps Example')),
-        body: YandexMap(
-            onMapCreated: (YandexMapController yandexMapController) {
-              yandexMapController.moveCamera(
-                animation: const MapAnimation(
-                    type: MapAnimationType.linear, duration: 1
-                ),
-
-                CameraUpdate.newCameraPosition(cameraPosition),
-              );
-            },
-
-            mapObjects: yandexMapService.mapObjects
-        ),
+        body: YandexMapWidget().createYandexMap()
       ),
     );
   }

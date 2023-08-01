@@ -1,6 +1,7 @@
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 export 'package:yandex_mapkit/yandex_mapkit.dart';
 
+
 class YandexMapPlacemarkObj {
   final int placemarkObjId;
   final Point placemarkObjPoint;
@@ -31,6 +32,7 @@ class YandexMapPlacemarkObj {
   }
 }
 
+
 class YandexMapService {
   final List<YandexMapPlacemarkObj> placemarkObjects;
   final List<MapObject> mapObjects;
@@ -45,6 +47,7 @@ class YandexMapService {
   ];
 }
 
+
 class CameraObject {
   final Point cameraObjPoint;
   final double zoom;
@@ -58,6 +61,62 @@ class CameraObject {
     return CameraPosition(
       target: cameraObjPoint,
       zoom: zoom,
+    );
+  }
+}
+
+
+class YandexMapWidget {
+  // Placemark Objects
+  final yandexMapService = YandexMapService(
+      placemarkObjects: [
+        YandexMapPlacemarkObj(
+          placemarkObjId: 1,
+          placemarkObjPoint: const Point(latitude: 55.75124, longitude: 37.618423),
+          opacity: 0.8,
+          iconPath: 'lib/assets/place.png',
+          iconScale: 1,
+        ),
+        YandexMapPlacemarkObj(
+          placemarkObjId: 2,
+          placemarkObjPoint: const Point(latitude: 55.74524, longitude: 37.618423),
+          opacity: 0.8,
+          iconPath: 'lib/assets/place.png',
+          iconScale: 1,
+        ),
+        YandexMapPlacemarkObj(
+          placemarkObjId: 3,
+          placemarkObjPoint: const Point(latitude: 55.74824, longitude: 37.621423),
+          opacity: 0.8,
+          iconPath: 'lib/assets/place.png',
+          iconScale: 1,
+        ),
+      ]
+  );
+  // ---
+
+
+  // Camera Position
+  final cameraPosition = CameraObject(
+      cameraObjPoint: const Point(latitude: 55.751244, longitude: 37.618423),
+      zoom: 14
+  ).createCamera();
+  // ---
+
+
+  YandexMap createYandexMap() {
+    return YandexMap(
+        onMapCreated: (YandexMapController yandexMapController) {
+          yandexMapController.moveCamera(
+            animation: const MapAnimation(
+                type: MapAnimationType.linear, duration: 1
+            ),
+
+            CameraUpdate.newCameraPosition(cameraPosition),
+          );
+        },
+
+        mapObjects: yandexMapService.mapObjects
     );
   }
 }
