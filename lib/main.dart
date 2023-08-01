@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'auth_screen.dart';
 import 'yandex_map.dart';
 
 
@@ -10,6 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({ Key? key}) : super(key: key);
 
+  // Main Screen Without Auth
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,6 +21,24 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+  // ---
+
+
+  // Auth Screen (Login - 1234 / Pass - 1234)
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     home: AuthScreen(),
+  //     routes: {
+  //       '/home': (ctx) =>
+  //           Scaffold(
+  //             appBar: AppBar(title: const Text('Yandex Maps Example')),
+  //             body: YandexMapWidget().createYandexMap(),
+  //           ),
+  //     },
+  //   );
+  // }
+  // ---
 }
 
   // This widget is the root of your application.
