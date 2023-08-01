@@ -7,7 +7,7 @@ name: Dart
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "yandex_map" ]
   pull_request:
     branches: [ "master" ]
 
