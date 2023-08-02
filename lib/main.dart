@@ -12,31 +12,31 @@ class MyApp extends StatelessWidget {
   const MyApp({ Key? key}) : super(key: key);
 
   // Main Screen Without Auth
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(title: const Text('Yandex Maps Example')),
-          body: YandexMapWidget().createYandexMap()
-      ),
-    );
-  }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     home: Scaffold(
+  //         appBar: AppBar(title: const Text('Yandex Maps Example')),
+  //         body: YandexMapWidget().createYandexMap()
+  //     ),
+  //   );
+  // }
   // ---
 
 
   // Auth Screen
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     home: AuthScreen(),
-  //     routes: {
-  //       '/home': (ctx) => Scaffold(
-  //         appBar: AppBar(title: const Text('Yandex Maps Example')),
-  //         body: YandexMapWidget().createYandexMap(),
-  //       ),
-  //     },
-  //   );
-  // }
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: AuthScreen(),
+      routes: {
+        '/home': (ctx) => Scaffold(
+          appBar: AppBar(title: const Text('Yandex Maps Example')),
+          body: YandexMapWidget().createYandexMap(),
+        ),
+      },
+    );
+  }
   // ---
 }
 
