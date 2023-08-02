@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 
 
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
@@ -16,12 +18,12 @@ class _AuthScreenState extends State<AuthScreen> {
   final _verificationCodeController = TextEditingController();
   bool _showVerificationCode = false;
 
-  final _appColor = Color(0xFFFCF8F3); // Нежный кофейный оттенок
-  final _inputFieldColor = Color(0xFFE8DED3); // Слегка темнее оттенок для поля ввода
-  final _titleColor = Color(0xFF6C4F1F);
-  final _textColor = Color(0xFF000000);
-  final _hintColor = Color(0x54000000);
-  final _buttonColor = Color(0xFF78A0CE);
+  final _appColor = const Color(0xFFFCF8F3); // Нежный кофейный оттенок
+  final _inputFieldColor = const Color(0xFFE8DED3); // Слегка темнее оттенок для поля ввода
+  final _titleColor = const Color(0xFF6C4F1F);
+  final _textColor = const Color(0xFF000000);
+  final _hintColor = const Color(0x54000000);
+  final _buttonColor = const Color(0xFF78A0CE);
 
   void _trySubmit() {
     final isValid = _formKey.currentState?.validate();
@@ -77,8 +79,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(left: 16.0, top: 16.0, right: 4, bottom: 16.0),
-                                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                                margin: const EdgeInsets.only(left: 16.0, top: 16.0, right: 4, bottom: 16.0),
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                 decoration: BoxDecoration(
                                   color: _inputFieldColor,
                                   borderRadius: BorderRadius.circular(10.0),
@@ -94,16 +96,16 @@ class _AuthScreenState extends State<AuthScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                       left: 4,
                                       top: 16.0,
                                       right: 16.0,
                                       bottom: 16.0
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                   decoration: BoxDecoration(
                                     color: _inputFieldColor,
                                     borderRadius: BorderRadius.circular(10.0),
@@ -131,7 +133,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                       PhoneNumberFormatter(),
                                     ],
                                     decoration: InputDecoration(
-                                      hintText: '000 000 00 00',
+                                      hintText: '987 654 32 10',
                                       hintStyle: TextStyle(
                                           color: _hintColor,
                                           fontSize: 24,
