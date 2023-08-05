@@ -152,14 +152,18 @@ class _AuthScreenState extends State<AuthScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     InputCodePartWidget(
-                                        _verificationCode_Controllers[0], submitFunc: _trySubmit),
+                                        _verificationCode_Controllers[0],
+                                        submitFunc: _trySubmit),
                                     InputCodePartWidget(
-                                        _verificationCode_Controllers[1], submitFunc: _trySubmit),
+                                        _verificationCode_Controllers[1],
+                                        submitFunc: _trySubmit),
                                     InputCodePartWidget(
-                                        _verificationCode_Controllers[2], submitFunc: _trySubmit),
+                                        _verificationCode_Controllers[2],
+                                        submitFunc: _trySubmit),
                                     InputCodePartWidget(
-                                        _verificationCode_Controllers[3], submitFunc: _trySubmit, last: true)
-                              ]
+                                        _verificationCode_Controllers[3],
+                                        submitFunc: _trySubmit, last: true)
+                                  ]
                               )
                           )
                       ],
@@ -188,23 +192,35 @@ class InputCodePartWidget extends StatelessWidget {
   final VoidCallback submitFunc;
 
 
-  const InputCodePartWidget(this._verificationCodeController, {super.key, this.last = false, required this.submitFunc});
+  const InputCodePartWidget(this._verificationCodeController,
+      {super.key, this.last = false, required this.submitFunc});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerRight,
+
       height: 75,
       width: 60,
+
       margin: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppColor.inputFieldColor,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextFormField(
-        onChanged: (String s){ FocusScope.of(context).nextFocus(); if (last) { submitFunc(); };},
+
+        onChanged: (String s) {
+          if (s != "")
+            FocusScope.of(context).nextFocus();
+          if (last)
+            submitFunc();
+        },
+
         textAlign: TextAlign.center,
         controller: _verificationCodeController,
+
+
         style: const TextStyle(
           color: AppColor.textColor,
           fontSize: 24,
@@ -242,8 +258,8 @@ class InputCodePartWidget extends StatelessWidget {
 
 class PhoneNumberFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue,
+      TextEditingValue newValue) {
     final int selectionIndex = newValue.selection.end;
 
     final oldValueTextNoSpaces = oldValue.text.replaceAll(' ', '');
@@ -255,7 +271,7 @@ class PhoneNumberFormatter extends TextInputFormatter {
 
       newValue = newValue.copyWith(
           selection:
-              TextSelection.collapsed(offset: newValue.selection.end - 1));
+          TextSelection.collapsed(offset: newValue.selection.end - 1));
     }
 
     final StringBuffer newString = StringBuffer();
@@ -266,7 +282,7 @@ class PhoneNumberFormatter extends TextInputFormatter {
         if (i < selectionIndex) {
           newValue = newValue.copyWith(
               selection:
-                  TextSelection.collapsed(offset: newValue.selection.end + 1));
+              TextSelection.collapsed(offset: newValue.selection.end + 1));
         }
       }
       newString.write(newValueTextCopy[i]);
@@ -281,8 +297,8 @@ class PhoneNumberFormatter extends TextInputFormatter {
 
 class CodeFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue,
+      TextEditingValue newValue) {
     final int selectionIndex = newValue.selection.end;
 
     final oldValueTextNoSpaces = oldValue.text.replaceAll(' ', '');
@@ -294,7 +310,7 @@ class CodeFormatter extends TextInputFormatter {
 
       newValue = newValue.copyWith(
           selection:
-              TextSelection.collapsed(offset: newValue.selection.end - 1));
+          TextSelection.collapsed(offset: newValue.selection.end - 1));
     }
 
     final StringBuffer newString = StringBuffer();
@@ -305,7 +321,7 @@ class CodeFormatter extends TextInputFormatter {
         if (i < selectionIndex) {
           newValue = newValue.copyWith(
               selection:
-                  TextSelection.collapsed(offset: newValue.selection.end + 1));
+              TextSelection.collapsed(offset: newValue.selection.end + 1));
         }
       }
       newString.write(newValueTextCopy[i]);
