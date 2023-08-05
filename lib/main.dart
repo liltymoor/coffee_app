@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'auth_screen.dart';
 import 'yandex_map.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // Auth Screen
   @override
@@ -18,16 +17,14 @@ class MyApp extends StatelessWidget {
       home: const AuthScreen(),
       routes: {
         '/home': (ctx) => Scaffold(
-          appBar: AppBar(title: const Text('Yandex Maps Example')),
-          body: YandexMapWidget().createYandexMap(),
-        ),
+              appBar: AppBar(title: const Text('Yandex Maps Example')),
+              body: YandexMapWidget().createYandexMap(),
+            ),
       },
     );
   }
-  // ---
+// ---
 }
-
-
 
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
