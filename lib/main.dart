@@ -14,12 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Nunito'
+      ),
       home: const AuthScreen(),
       routes: {
         '/home': (ctx) => Scaffold(
-              appBar: AppBar(title: const Text('Yandex Maps Example')),
-              body: YandexMapWidget().createYandexMap(),
-            ),
+          appBar: AppBar(title: const Text('Yandex Maps Example')),
+          body: YandexMapWidget(),
+        ),
       },
     );
   }

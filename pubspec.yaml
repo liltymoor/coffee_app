@@ -76,7 +76,56 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Open Sans
+      fonts:
+        - asset: lib/assets/fonts/OpenSans-VariableFont.ttf
+        - asset: lib/assets/fonts/OpenSans-Italic-VariableFont.ttf
+          style: italic
+
+    - family: Nunito
+      fonts:
+        - asset: lib/assets/fonts/Nunito-ExtraLight.ttf
+          weight: 200
+        - asset: lib/assets/fonts/Nunito-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: lib/assets/fonts/Nunito-Light.ttf
+          weight: 300
+        - asset: lib/assets/fonts/Nunito-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: lib/assets/fonts/Nunito-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/Nunito-RegularItalic.ttf
+          weight: 400
+          style: italic
+        - asset: lib/assets/fonts/Nunito-Medium.ttf
+          weight: 500
+        - asset: lib/assets/fonts/Nunito-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: lib/assets/fonts/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/Nunito-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: lib/assets/fonts/Nunito-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/Nunito-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: lib/assets/fonts/Nunito-ExtraBold.ttf
+          weight: 800
+        - asset: lib/assets/fonts/Nunito-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: lib/assets/fonts/Nunito-Black.ttf
+          weight: 900
+        - asset: lib/assets/fonts/Nunito-BlackItalic.ttf
+          weight: 900
+          style: italic
+
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
