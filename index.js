@@ -19,6 +19,7 @@ const app_init = async () => {
         await sequelize.sync();         // DB synchronization
         app.listen(PORT, () => {console.log('Server started on port ' + PORT)}); // Listening to server PORT
     }
+
     catch (exception) 
     {
         console.log("Exception were caught: " + exception);
@@ -27,6 +28,5 @@ const app_init = async () => {
 
 
 app_init();
-
 
 // =========================
