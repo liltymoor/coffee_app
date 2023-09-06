@@ -52,6 +52,41 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
     'https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg',
   ];
 
+  late CameraPosition cameraPosition;
+  late YandexMapController _mapController;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    cameraPosition = const CameraPosition(
+      target: Point(latitude: 55.751244, longitude: 37.618423),
+      zoom: 14,
+    );
+  }
+
+  CameraPosition _zoomOut(CameraPosition oldCameraObject) {
+    CameraPosition newCameraObject = CameraObject(
+      cameraObjPoint: oldCameraObject.target,
+      zoom: oldCameraObject.zoom - 2,
+    ).createCamera();
+
+    return newCameraObject;
+  }
+
+  void _handleZoomOut() {
+    final newCameraPosition = _zoomOut(cameraPosition);
+
+    setState(() {
+      cameraPosition = newCameraPosition;
+    });
+
+    _mapController.moveCamera(
+      CameraUpdate.newCameraPosition(newCameraPosition),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Placemark Objects
@@ -91,7 +126,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
 
           placemarkObjPoint: const Point(latitude: 55.74524, longitude: 37.618423),
           opacity: 0.8,
-          iconPath: 'lib/assets/place.png',
+          iconPath: 'lib/assets/images/place.png',
           iconScale: 1,
         ).createPlacemark((placemarkObj) {
           setState(() {
@@ -122,26 +157,33 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
         }),
       ],
     );
+
     // Camera Position
     final cameraPosition = CameraObject(
       cameraObjPoint: const Point(latitude: 55.751244, longitude: 37.618423),
       zoom: 14,
     ).createCamera();
 
+    YandexMap yandexMap = YandexMap(
+      onMapCreated: (YandexMapController yandexMapController) {
+        yandexMapController.moveCamera(
+          animation: const MapAnimation(
+            type: MapAnimationType.linear,
+            duration: 1,
+          ),
+
+          CameraUpdate.newCameraPosition(cameraPosition),
+        );
+
+        _mapController = yandexMapController;
+      },
+      mapObjects: yandexMapService.mapObjects,
+    );
+
     return Stack(
       children: [
-        YandexMap(
-          onMapCreated: (YandexMapController yandexMapController) {
-            yandexMapController.moveCamera(
-              animation: const MapAnimation(
-                type: MapAnimationType.linear,
-                duration: 1,
-              ),
-              CameraUpdate.newCameraPosition(cameraPosition),
-            );
-          },
-          mapObjects: yandexMapService.mapObjects,
-        ),
+        yandexMap,
+
         if (isInfoVisible)
           Positioned(
               bottom: 0,
@@ -173,7 +215,16 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
                   //
                 ],
               )
-          )
+          ),
+
+        Positioned(
+          top: 10, // Позиционируем кнопку справа сверху
+          right: 10,
+          child: FloatingActionButton(
+            onPressed: _handleZoomOut,
+            child: Icon(Icons.remove),
+          ),
+        )
       ],
     );
   }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'assets/elements/profile/profile.dart';
+import 'assets/elements/documents/documents.dart';
+import 'assets/elements/payment_methods/payment_methods.dart';
+import 'assets/elements/bonuses/bonuses.dart';
+
 import 'auth_screen.dart';
 import 'yandex_map.dart';
 
@@ -21,12 +26,16 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (ctx) => Scaffold(
           appBar: AppBar(title: const Text('Yandex Maps Example')),
-          body: YandexMapWidget(),
+          // body: YandexMapWidget(),
+          // body: ProfilePage(),
+          // body: DocumentsPage(),
+          // body: PaymentMethodsPage(),
+          body: BonusesPage(),
         ),
       },
     );
   }
-// ---
+  // ---
 }
 
 // class MyHomePage extends StatefulWidget {

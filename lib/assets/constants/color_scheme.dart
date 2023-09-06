@@ -7,4 +7,7 @@ class AppColor {
   static const textColor = Color.fromARGB(255, 0, 0, 0);
   static const hintColor = Color(0x54000000);
   static const buttonColor = Color.fromARGB(255, 217, 217, 217);
+
+  static const figmaColorLight = Color(0xFFD9D9D9);
+  static const figmaColorDark = Color(0xFF696969);
 }
