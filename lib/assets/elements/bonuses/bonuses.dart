@@ -6,7 +6,7 @@ import 'package:coffee_app/assets/elements/payment_methods/payment_card_containe
 
 
 class BonusesPage extends StatelessWidget {
-  final ValueNotifier<bool> isSwitchedNotifier = ValueNotifier<bool>(false);
+  final ValueNotifier<bool> isSwitchedNotifier = ValueNotifier<bool>(true);
   final PageController _pageController = PageController();
 
 
@@ -186,7 +186,26 @@ class BonusesPage extends StatelessWidget {
                                           height: 50,
                                           color: Colors.transparent,
                                           child: Center(
-                                            child: Text("Отправь"),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(right: 5.0),
+                                                  child: Image.asset(
+                                                    'lib/assets/images/share.png',
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Отправь",
+                                                  style: TextStyle(
+                                                      fontSize: 17.0,
+                                                      fontWeight: FontWeight.w700
+                                                  ),
+                                                ),
+                                              ]
+                                            )
                                           ),
                                         ),
                                       ),
@@ -199,7 +218,26 @@ class BonusesPage extends StatelessWidget {
                                           height: 50,
                                           color: Colors.transparent,
                                           child: Center(
-                                            child: Text("Покажи"),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(right: 5.0),
+                                                  child: Image.asset(
+                                                    'lib/assets/images/eye.png',
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Покажи",
+                                                  style: TextStyle(
+                                                      fontSize: 17.0,
+                                                      fontWeight: FontWeight.w700
+                                                  ),
+                                                ),
+                                              ]
+                                            )
                                           ),
                                         ),
                                       ),
@@ -223,33 +261,104 @@ class BonusesPage extends StatelessWidget {
                             },
                             children: [
                               Container(
-                                color: Colors.orange,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        child: Text(
-                                          "Делись бонусами и получай скидки",
-                                          style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        )
+                                color: AppColor.figmaColorLight,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Делись бонусами и получай скидки",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 17.0,
+                                        fontWeight: FontWeight.w700,
+
                                       ),
-                                      Text("Первый контейнер"),
-                                      Text("Первый контейнер"),
-                                    ],
-                                  )
-                                ),
+                                    ),
+                                    Text(
+                                      "Отправь промокод другу - он получит 100 бонусов. "
+                                      "Когда друго потратит первые 100 ₽, ты получишь 100 бонусов на счет",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 13.0,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColor.figmaColorDark,
+                                      ),
+                                    ),
+
+                                    SizedBox(height: 20.0,),
+
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "promo12346",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(bottom: 5.0, left: 5.0),
+                                          child: Image.asset(
+                                            'lib/assets/images/copy.png',
+                                            width: 30,
+                                            height: 30,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    Spacer(),
+
+                                    InkWell(
+                                      onTap: () {
+
+                                      },
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width * 0.9 - 40,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: AppColor.figmaColorMid,
+                                          borderRadius: BorderRadius.circular(10.0),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'Поделиться',
+                                            style: TextStyle(
+                                              fontSize: 17.0,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ),
                               Container(
-                                color: Colors.green,
+                                color: AppColor.figmaColorLight,
                                 child: Center(
                                     child: Column(
                                       children: [
-                                        Text("Первый контейнер"),
-                                        Text("Первый контейнер"),
-                                        Text("Первый контейнер"),
+                                        Text(
+                                          "Покажи промокод в виде QR-кода",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 17.0,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+
+                                        Spacer(),
+
+                                        Padding(
+                                          padding: EdgeInsets.only(bottom: 5.0, left: 5.0),
+                                          child: Image.asset(
+                                            'lib/assets/images/qr.png',
+                                            width: 150,
+                                            height: 150,
+                                          ),
+                                        ),
                                       ],
                                     )
                                 ),

@@ -9,5 +9,6 @@ class AppColor {
   static const buttonColor = Color.fromARGB(255, 217, 217, 217);
 
   static const figmaColorLight = Color(0xFFD9D9D9);
+  static const figmaColorMid = Color(0xFFA5A5A5);
   static const figmaColorDark = Color(0xFF696969);
 }
