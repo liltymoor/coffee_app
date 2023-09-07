@@ -16,11 +16,14 @@ class BonusesPage extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            top: 20.0,
+            top: 30.0,
             left: 20.0,
             child: Text(
               'Бонусы',
-              style: TextStyle(fontSize: 24.0),
+              style: TextStyle(
+                fontSize: 26.0,
+                fontWeight: FontWeight.w600
+              ),
             ),
           ),
 
@@ -62,7 +65,10 @@ class BonusesPage extends StatelessWidget {
                             children: [
                               Text(
                                 'Доступно',
-                                style: TextStyle(fontSize: 12.0,),
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w600
+                                ),
                               ),
                               Row(
                                 children: [
@@ -88,6 +94,7 @@ class BonusesPage extends StatelessWidget {
                                 '1 бонус = 1 ₽',
                                 style: TextStyle(
                                     fontSize: 12.0,
+                                    fontWeight: FontWeight.w600,
                                     color: AppColor.figmaColorDark
                                 ),
                               ),
