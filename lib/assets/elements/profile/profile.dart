@@ -145,7 +145,10 @@ class ProfilePage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'Выйти из аккаунта',
-                        style: TextStyle(fontSize: 24.0),
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
