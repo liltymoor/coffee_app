@@ -27,10 +27,10 @@ class MyApp extends StatelessWidget {
         '/home': (ctx) => Scaffold(
           appBar: AppBar(title: const Text('Yandex Maps Example')),
           // body: YandexMapWidget(),
-          // body: ProfilePage(),
+          body: ProfilePage(),
           // body: DocumentsPage(),
           // body: PaymentMethodsPage(),
-          body: BonusesPage(),
+          // body: BonusesPage(),
         ),
       },
     );

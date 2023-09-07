@@ -10,13 +10,17 @@ class ProfilePage extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            top: 20.0,
+            top: 30.0,
             left: 20.0,
             child: Text(
               'Профиль',
-              style: TextStyle(fontSize: 24.0),
+              style: TextStyle(
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.w600
+              ),
             ),
           ),
+
           Positioned(
             top: 20.0,
             right: 20.0,
@@ -47,10 +51,15 @@ class ProfilePage extends StatelessWidget {
                   padding: EdgeInsets.all(20.0),
                   child: Text(
                     '+79876543210',
-                    style: TextStyle(fontSize: 24.0),
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
+
                 SizedBox(height: 20.0),
+
                 InkWell(
                   onTap: () {
                     // Добавьте здесь код для обработки нажатия на "Историю покупок"
@@ -64,11 +73,64 @@ class ProfilePage extends StatelessWidget {
                     padding: EdgeInsets.all(20.0),
                     child: Text(
                       'История покупок',
-                      style: TextStyle(fontSize: 24.0),
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
+
                 Spacer(),
+
+                Container(
+                  width: 0.9 * MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: AppColor.figmaColorLight,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 0.9 * MediaQuery.of(context).size.width,
+                        child: Text(
+                          "Ваш личный код:",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 20.0),
+
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 5.0, left: 5.0),
+                        child: Image.asset(
+                          'lib/assets/images/qr.png',
+                          width: 200,
+                          height: 200,
+                        ),
+                      ),
+
+                      SizedBox(height: 20.0),
+
+                      Text(
+                        "US123456",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ]
+                  ),
+                ),
+
+                Spacer(),
+
                 InkWell(
                   onTap: () {
 
