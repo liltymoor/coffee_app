@@ -18,7 +18,7 @@ const app_init = async () => {
     {
         await sequelize.authenticate(); // DB authorization
         await sequelize.sync();         // DB synchronization
-        await models.coffeePlace.destroy();
+        await models.coffeePlace.destroy({ where: { id: 1}});
         await models.coffeePlace.create({
             address: 'Тверская ул., 2, Москва',
             coordinates: sequelize.literal(`POINT(37.6055, 55.7565)`),
