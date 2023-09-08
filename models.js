@@ -21,11 +21,15 @@ const account = sequelize.define("account", {
 const coffeePlace = sequelize.define("coffee_place", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     address: {type: DataTypes.STRING, allowNull: false},
-    coordinates: {type: DataTypes.GEOMETRY('POINT'), allowNull: true},
+    coordinates: {type: 'point', allowNull: true},
     start_hours: {type: DataTypes.TIME, allowNull: true},
     finish_hours: {type: DataTypes.TIME, allowNull: true},
-    unionAccount_id: {type: DataTypes.INTEGER, allowNull: false}
-})
+    unionAccount_id: {type: DataTypes.INTEGER, allowNull: false}},
+    {
+        charset: 'utf8',
+        collate: 'utf8_unicode_ci'
+    }
+    )
 
 const product = sequelize.define("product", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
