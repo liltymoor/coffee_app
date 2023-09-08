@@ -21,7 +21,7 @@ const account = sequelize.define("account", {
 const coffeePlace = sequelize.define("coffee_place", {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     address: {type: DataTypes.STRING, allowNull: false},
-    coordinates: {type: DataTypes.GEOMETRY, allowNull: true},
+    coordinates: {type: DataTypes.GEOMETRY('POINT'), allowNull: true},
     start_hours: {type: DataTypes.TIME, allowNull: true},
     finish_hours: {type: DataTypes.TIME, allowNull: true},
     unionAccount_id: {type: DataTypes.INTEGER, allowNull: false}
