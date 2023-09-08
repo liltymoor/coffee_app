@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:coffee_app/assets/constants/color_scheme.dart';
+import 'package:coffee_app/assets/constants/adaptive_size.dart';
+
 import 'package:flutter/material.dart';
 import 'payment_card_container.dart';
 
@@ -14,7 +16,6 @@ class PaymentMethodsPage extends StatelessWidget {
     {"name": 'Банковская карта 6', "number": '3105'},
     {"name": 'Банковская карта 7', "number": '5742'},
     {"name": 'Банковская карта 8', "number": '0324'},
-    // Добавьте свои карточки здесь
   ];
 
   Widget _buildColoredBox(Color color, double width) {
@@ -34,47 +35,51 @@ class PaymentMethodsPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 20.0,
-            left: 20.0,
-            child: Text(
-              'Ваши способы оплаты',
-              style: TextStyle(fontSize: 24.0),
-            ),
-          ),
-
-          Positioned(
-              top: 20.0,
-              right: 20.0,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Color(0xFFD9D9D9),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    // Добавьте здесь код для закрытия страницы профиля
-                  },
-                ),
-              )
-          ),
-
           Center(
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 100.0),
+                SizedBox(height: adaptiveSize(context, 20.0)),
 
                 Container(
-                  height: 3 * PaymentCardContainer.height + 32.0,
                   width: 0.9 * MediaQuery.of(context).size.width,
-                  child: ListView.separated(
-                    itemCount: cardData.length,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(height: 16.0);
-                    },
+                  child: Row(
+                    children: [
+                      Text(
+                        'Ваши способы оплаты',
+                        style: TextStyle(
+                            fontSize: adaptiveSize(context, 26.0),
+                            fontWeight: FontWeight.w600
+                        ),
+                      ),
 
+                      Spacer(),
+
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFD9D9D9),
+                          borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0)),
+                        ),
+                        child: IconButton(
+                          icon: Icon(Icons.close),
+                          onPressed: () {
+                            // Добавьте здесь код для закрытия страницы профиля
+                          },
+                        ),
+                      )
+                    ],
+                  )
+                ),
+
+                SizedBox(height: adaptiveSize(context, 30.0)),
+
+                Container(
+                  height: 3 * (adaptiveSize(context, 110.0) + adaptiveSize(context, 16.0)),
+                  width: 0.9 * MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: PageScrollPhysics(), // Добавлено для "постраничной" прокрутки
+                    itemCount: cardData.length,
                     itemBuilder: (BuildContext context, int index) {
                       return PaymentCardContainer(
                         cardName: cardData[index]["name"] ?? "",
@@ -84,15 +89,15 @@ class PaymentMethodsPage extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 20.0,),
+                SizedBox(height: adaptiveSize(context, 20.0)),
 
                 InkWell(
                   onTap: () {
 
                   },
                   child: Container(
-                    width: 30.0,
-                    height: 30.0,
+                    width: adaptiveSize(context, 30.0),
+                    height: adaptiveSize(context, 30.0),
                     decoration: BoxDecoration(
                       color: AppColor.figmaColorLight,
                       shape: BoxShape.circle,
@@ -112,21 +117,22 @@ class PaymentMethodsPage extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 10.0,),
+                // SizedBox(height: 10.0,),
+                Spacer(),
 
                 Container(
+                  width: 0.9 * MediaQuery.of(context).size.width,
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: 20),
                   child: Text(
                     'Возможные способы оплаты',
                     style: TextStyle(
                       color: AppColor.figmaColorDark,
-                      fontSize: 16.0,
+                      fontSize: adaptiveSize(context, 16.0),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 10.0,),
+                SizedBox(height: adaptiveSize(context, 10.0)),
 
                 Container(
                   width: 0.9 * MediaQuery.of(context).size.width,
@@ -136,17 +142,23 @@ class PaymentMethodsPage extends StatelessWidget {
                           Colors.blue,
                           (0.9 * MediaQuery.of(context).size.width - 30.0) / 4
                       ),
-                      SizedBox(width: 10.0), // Добавляем пробел между прямоугольниками
+
+                      Spacer(),
+
                       _buildColoredBox(
                           Colors.red,
                           (0.9 * MediaQuery.of(context).size.width - 30.0) / 4
                       ),
-                      SizedBox(width: 10.0), // Добавляем пробел между прямоугольниками
+
+                      Spacer(),
+
                       _buildColoredBox(
                           Colors.green,
                           (0.9 * MediaQuery.of(context).size.width - 30.0) / 4
                       ),
-                      SizedBox(width: 10.0), // Добавляем пробел между прямоугольниками
+
+                      Spacer(),
+
                       _buildColoredBox(
                           Colors.yellow,
                           (0.9 * MediaQuery.of(context).size.width - 30.0) / 4
@@ -154,6 +166,8 @@ class PaymentMethodsPage extends StatelessWidget {
                     ],
                   )
                 ),
+
+                SizedBox(height: adaptiveSize(context, 30.0)),
               ],
             ),
           ),
