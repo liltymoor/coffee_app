@@ -34,9 +34,9 @@ app_init();
 // APP TEST GET METHOD
 // =========================
 
-app.get('/', (req, res) => {
-    res.status(200).json(models.coffeePlace.findAll());
-
+app.get('/', async (req, res) => {
+    const data = await models.coffeePlace.findAll();
+    res.status(200).json(data);
 })
 
 // =========================
