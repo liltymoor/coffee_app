@@ -24,7 +24,8 @@ const coffeePlace = sequelize.define("coffee_place", {
     coordinates: {type: 'point', allowNull: true},
     start_hours: {type: DataTypes.TIME, allowNull: true},
     finish_hours: {type: DataTypes.TIME, allowNull: true},
-    unionAccount_id: {type: DataTypes.INTEGER, allowNull: false}},
+    unionAccount_id: {type: DataTypes.INTEGER, allowNull: false},
+    is_public: {type: DataTypes.BOOLEAN, allowNull: false}},
     {
         charset: 'utf8',
         collate: 'utf8_unicode_ci'
