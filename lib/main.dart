@@ -4,6 +4,7 @@ import 'assets/elements/profile/profile.dart';
 import 'assets/elements/documents/documents.dart';
 import 'assets/elements/payment_methods/payment_methods.dart';
 import 'assets/elements/bonuses/bonuses.dart';
+import 'assets/elements/subscribes/subscribes.dart';
 
 import 'auth_screen.dart';
 import 'yandex_map.dart';
@@ -28,9 +29,10 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(title: const Text('Yandex Maps Example')),
           // body: YandexMapWidget(),
           // body: ProfilePage(),
-          body: DocumentsPage(),
+          // body: DocumentsPage(),
           // body: PaymentMethodsPage(),
           // body: BonusesPage(),
+          body: SubscibesPage(),
         ),
       },
     );

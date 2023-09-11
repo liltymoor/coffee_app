@@ -8,8 +8,6 @@ import 'package:coffee_app/assets/constants/adaptive_size.dart';
 
 
 class PaymentCardContainer extends StatelessWidget {
-  // static const height = adaptiveSize(context, 110.0);
-
   final cardName;
   final cardNumber;
 
