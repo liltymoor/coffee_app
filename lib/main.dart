@@ -27,12 +27,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (ctx) => Scaffold(
           appBar: AppBar(title: const Text('Yandex Maps Example')),
-          // body: YandexMapWidget(),
+          body: YandexMapWidget(),
           // body: ProfilePage(),
           // body: DocumentsPage(),
           // body: PaymentMethodsPage(),
           // body: BonusesPage(),
-          body: SubscibesPage(),
+          // body: SubscibesPage(),
         ),
       },
     );

@@ -7,6 +7,9 @@ import 'package:coffee_app/assets/elements/painters.dart';
 import 'package:coffee_app/assets/elements/placemark_obj.dart';
 import 'package:coffee_app/assets/elements/placemark_information.dart';
 
+import 'package:coffee_app/assets/constants/adaptive_size.dart';
+
+
 class YandexMapService {
   final List<PlacemarkMapObject> placemarkObjects;
   final List<MapObject> mapObjects;
@@ -105,7 +108,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
 
           placemarkObjPoint: const Point(latitude: 55.75124, longitude: 37.618423),
           opacity: 0.8,
-          iconPath: 'lib/assets/place.png',
+          iconPath: 'lib/assets/images/place.png',
           iconScale: 1,
         ).createPlacemark((placemarkObj) {
           setState(() {
@@ -147,7 +150,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
 
           placemarkObjPoint: const Point(latitude: 55.74824, longitude: 37.621423),
           opacity: 0.8,
-          iconPath: 'lib/assets/place.png',
+          iconPath: 'lib/assets/images/place.png',
           iconScale: 1,
         ).createPlacemark((placemarkObj) {
           setState(() {
@@ -193,16 +196,16 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
                 children: [
                   // Information Shadow
                   Positioned(
-                    top: 30,
+                    top: adaptiveSize(context, 30.0),
                     left: 0,
                     right: 0,
                     child: CustomPaint(
                       painter: TopShadowPainter(
-                        blur_size: 8,
-                        shadow_size: 30,
+                        blur_size: adaptiveSize(context, 8.0),
+                        shadow_size: adaptiveSize(context, 30.0),
                         color: Colors.lightBlue
                       ),
-                      size: Size(MediaQuery.of(context).size.width, 50),
+                      size: Size(MediaQuery.of(context).size.width, adaptiveSize(context, 50.0)),
                     ),
                   ),
                   // ---
@@ -217,14 +220,14 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
               )
           ),
 
-        Positioned(
-          top: 10, // Позиционируем кнопку справа сверху
-          right: 10,
-          child: FloatingActionButton(
-            onPressed: _handleZoomOut,
-            child: Icon(Icons.remove),
-          ),
-        )
+        // Positioned(
+        //   top: 10, // Позиционируем кнопку справа сверху
+        //   right: 10,
+        //   child: FloatingActionButton(
+        //     onPressed: _handleZoomOut,
+        //     child: Icon(Icons.remove),
+        //   ),
+        // )
       ],
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:coffee_app/assets/elements/placemark_obj.dart';
-import 'package:flutter/services.dart';
+import 'package:coffee_app/assets/constants/adaptive_size.dart';
 
 
 class PlacemarkInformation {
@@ -17,16 +18,16 @@ class PlacemarkInformation {
 
   Container createPlacemarkContainer() {
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
+            topLeft: Radius.circular(adaptiveSize(context, 30.0)),
+            topRight: Radius.circular(adaptiveSize(context, 30.0)),
           ),
         ),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.5,
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(adaptiveSize(context, 20.0)),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,28 +36,28 @@ class PlacemarkInformation {
               Text(
                 selectedPlacemark.name,
                 style: TextStyle(
-                    fontSize: 24,
+                    fontSize: adaptiveSize(context, 24.0),
                     fontWeight: FontWeight.bold
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: adaptiveSize(context, 16.0)),
               // ---
 
               // Images Gallery
               Container(
-                height: 120,
+                height: adaptiveSize(context, 120.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: selectedPlacemark.gallery.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.only(right: adaptiveSize(context, 10.0)),
                       child: Image.network(selectedPlacemark.gallery[index]),
                     );
                   },
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: adaptiveSize(context, 16.0)),
               // ---
 
               // Object Location
@@ -70,30 +71,30 @@ class PlacemarkInformation {
                   selectedPlacemark.location,
                   style: TextStyle(
                       color: Colors.black54,
-                      fontSize: 16
+                      fontSize: adaptiveSize(context, 16.0)
                   ),
                 ),
               ),
               // ---
 
               // Schedule
-              SizedBox(height: 16),
+              SizedBox(height: adaptiveSize(context, 16.0)),
               Text(
                 selectedPlacemark.schedule,
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 16
+                    fontSize: adaptiveSize(context, 16.0)
                 ),
               ),
               // ---
 
               // Description
-              SizedBox(height: 16),
+              SizedBox(height: adaptiveSize(context, 16.0)),
               Text(
                 selectedPlacemark.description,
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 16
+                    fontSize: adaptiveSize(context, 16.0)
                 ),
               ),
               // ---
