@@ -7,6 +7,7 @@ const express   = require("express");
 const sequelize = require("./db");
 const models    = require('./models');
 const cors      = require('cors')
+const errorHandler = require('./errorHandler/errorHandler');
 
 const router    = require('./routes/router')
 
@@ -19,6 +20,9 @@ const app   = express();
 app.use(cors());
 app.use(express.json());
 app.use('/api', router);
+
+// Must be last
+app.use(errorHandler);
 
 const app_init = async () => {
     try 
