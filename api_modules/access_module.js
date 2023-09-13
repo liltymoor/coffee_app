@@ -2,6 +2,8 @@
 // MODULE IMPORTS
 // =========================
 
+require('../dotenv').config();
+
 const bcrypt                = require('bcrypt');
 const jwt                   = require('jsonwebtoken');
 const {Request, Response}   = require('express');
@@ -22,28 +24,22 @@ class AccessController
      */
     async login(req, res, next)
     {
+        // Getting POST data
         const {userLogin, userPassword, userRole} = req.body;
 
-        if (!userLogin|| !userPassword) {
+        // If user tries to pass empty data
+        if (!userLogin|| !userPassword) 
             return next(ErrorHandler.badRequest("Invalid login or password."));
-        }
 
-        let fetchAccount = await account.findOne({where: { login: userLogin}});
+        const fetchAccount = await account.findOne({where: { login:userLogin}});
 
-        if (!fetchAccount) {
-            fetchAccount = account.create({
-                login: userLogin,
-                password: await bcrypt.hash(userPassword, 5),
-                naming: "Super User account | Organization Acc",
-                role: "su",
-                coffee_place_id: -1
-            })
-            //return next(ErrorHandler.badRequest("Invalid login or password."));
-        }
-
-        if (!bcrypt.compareSync(userPassword, fetchAccount.password)) {
+        // If there is no user with such login
+        if (!fetchAccount)
             return next(ErrorHandler.badRequest("Invalid login or password."));
-        }
+
+        // If password is wrong
+        if (!bcrypt.compareSync(userPassword, fetchAccount.password))
+            return next(ErrorHandler.badRequest("Invalid login or password."));
         
         const token = jwt.sign(
             {login: userLogin, role: userRole},
@@ -51,10 +47,7 @@ class AccessController
             {expiresIn: '24h'}
         )
         
-        console.log("New JWT created | sk: " + process.env.SECRET_KEY + " JWT: " + token);
-        return res.json(token);
-
-        //res.json({message: "api in progress"})
+        return res.status(200).json(token);
     }
 
     async isAuth(req, res)
