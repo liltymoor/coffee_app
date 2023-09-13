@@ -56,7 +56,7 @@ class CoffeePlacesController {
         
         // Checking if some params are bad
         if (!address || !coordinates || !start_hours || !finish_hours || !unionAccount_id) {
-            next(ErrorHandler.badRequest("Some params were passed wrong"));
+            return next(ErrorHandler.badRequest("Some params were passed wrong"));
         }
 
 
