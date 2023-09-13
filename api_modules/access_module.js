@@ -28,7 +28,7 @@ class AccessController
             return next(ErrorHandler.badRequest("Invalid login or password."));
         }
 
-        const fetchAccount = await account.findOne({where: { login: userLogin}});
+        let fetchAccount = await account.findOne({where: { login: userLogin}});
 
         if (!fetchAccount) {
             fetchAccount = account.create({
