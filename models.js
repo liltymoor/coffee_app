@@ -15,6 +15,7 @@ const account = sequelize.define("account", {
     login: {type: DataTypes.CHAR(32), allowNull: false},
     password: {type: DataTypes.CHAR(32), allowNull: false},
     naming: {type: DataTypes.CHAR(64), allowNull: false},
+    role : {type: DataTypes.CHAR(16), allowNull: false, defaultValue: "default"},
     coffee_place_id: {type: DataTypes.INTEGER, allowNull: false}
 })
 

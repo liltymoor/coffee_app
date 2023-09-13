@@ -44,7 +44,7 @@ class CoffeePlacesController {
      */
     async createPlace(req, res, next)
     {
-        // Getting query (GET) params from request
+        // Getting query (POST) params from request
         const {
             address,
             coordinates, 
@@ -56,7 +56,7 @@ class CoffeePlacesController {
         
         // Checking if some params are bad
         if (!address || !coordinates || !start_hours || !finish_hours || !unionAccount_id) {
-            return next(ErrorHandler.badRequest("Some params were passed wrong"));
+            return next(ErrorHandler.badRequest("Some params were passed wrong | Check theese mandatory params were passed: address, coordinates, start_hours, finish_hours, unionAccount_id"));
         }
 
 
