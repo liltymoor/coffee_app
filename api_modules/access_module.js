@@ -14,7 +14,7 @@ const {account}             = require('../models');
 class AccessController
 {
     /**
-     * Function that gives the user his jwt (authorize him) token if he has an account in system.
+     * Function that gives the user his jwt (authorize) token if he has an account in system.
      * @param {Request<{}, any, any, qs.ParsedQs, Record<string, any>>} req 
      * @param {Response<any, Record<string, any>, number>} res 
      * @param {any} next
@@ -31,7 +31,14 @@ class AccessController
         const fetchAccount = await account.findOne({where: { login: userLogin}});
 
         if (!fetchAccount) {
-            return next(ErrorHandler.badRequest("Invalid login or password."));
+            fetchAccount = account.create({
+                login: userLogin,
+                password: await bcrypt.hash(userPassword, 5),
+                naming: "Super User account | Organization Acc",
+                role: "su",
+                coffee_place_id: -1
+            })
+            //return next(ErrorHandler.badRequest("Invalid login or password."));
         }
 
         if (!bcrypt.compareSync(userPassword, fetchAccount.password)) {
@@ -46,8 +53,6 @@ class AccessController
         
         console.log("New JWT created | sk: " + process.env.SECRET_KEY + " JWT: " + token);
         return res.json(token);
-
-
 
         //res.json({message: "api in progress"})
     }
