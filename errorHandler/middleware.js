@@ -9,8 +9,8 @@ const ApiError = require('./errorHandler');
  * @returns {any}
  */
 module.exports = function (error, req, res, next) {
-    if (err instanceof ApiError) {
-        return res.status(err.status).json({message: err.message});
+    if (error instanceof ApiError) {
+        return res.status(error.status).json({message: error.message});
     }
 
     return res.status(500).json({message: "Unexpected error."});
