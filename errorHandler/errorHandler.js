@@ -1,3 +1,4 @@
+
 class ErrorHandler extends Error{
     constructor(status, message) {
         super();
@@ -9,15 +10,15 @@ class ErrorHandler extends Error{
     // TODO STACK TRACE TO DB AND GIVE TO CLIENT A CODE OF ERROR
 
     static badRequest(message) {
-        return new ErrorHandler(404, "["+ this.caller.name +"] " + message);
+        return new ErrorHandler(404, message);
     }
 
     static internal(message) {
-        return new ErrorHandler(500, "["+ this.caller.name +"] " + message);
+        return new ErrorHandler(500, message);
     }
 
     static forbidden(message) {
-        return new ErrorHandler(403, "["+ this.caller.name +"] " + message);
+        return new ErrorHandler(403, message);
     }
 }
 
