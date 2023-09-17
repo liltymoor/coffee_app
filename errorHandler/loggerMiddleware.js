@@ -9,9 +9,8 @@ const { connectionHistory } = require('../models');
  * @returns {any}
  */
 module.exports = function (req, res, next) {
-
     const newConnection = connectionHistory.create({
-        client_ip: req.ip,
+        client_ip: req.ip.split(':')[3],
         user_agent: req.get('User-Agent'),
         headers: req.headers
     })
