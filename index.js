@@ -8,6 +8,7 @@ const sequelize     = require("./db");
 const models        = require('./models');
 const cors          = require('cors')
 const errorHandler  = require('./errorHandler/middleware');
+const logger        = require('./errorHandler/loggerMiddleware');
 
 const router        = require('./routes/router')
 
@@ -16,6 +17,9 @@ const router        = require('./routes/router')
 
 const PORT  = process.env.PORT || 5000;
 const app   = express();
+
+// Must be first
+app.use(logger);
 
 app.use(cors());
 app.use(express.json());

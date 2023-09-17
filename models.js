@@ -41,6 +41,18 @@ const product = sequelize.define("product", {
     coffee_place_id: {type: DataTypes.INTEGER, allowNull: false}
 })
 
+const connectionHistory = sequelize.define("connectionHistory", {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    client_ip: {type: DataTypes.CHAR(16), allowNull: false},
+    user_agent: {type: DataTypes.STRING, allowNull: false},
+    headers: { type: DataTypes.JSON, allowNull: false,
+        get() { JSON.parse(this.getDataValue("headers")); }, 
+        set(value) { return this.setDataValue("headers", JSON.stringify(value)); }},
+    server_time: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
+    
+})
+
+
 // MODEL RELATIONS
 // =========================
 
@@ -63,7 +75,8 @@ module.exports = {
     unionAccount,
     coffeePlace,
     account,
-    product
+    product,
+    connectionHistory
 }
 
 // =========================
