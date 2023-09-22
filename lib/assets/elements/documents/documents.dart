@@ -38,7 +38,7 @@ class DocumentsPage extends StatelessWidget {
                           child: IconButton(
                             icon: Icon(Icons.close),
                             onPressed: () {
-                              // Добавьте здесь код для закрытия страницы профиля
+                              Navigator.of(context).pushReplacementNamed('/home');
                             },
                           ),
                         )

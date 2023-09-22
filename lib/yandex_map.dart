@@ -101,7 +101,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
           name: "Ароматное убежище",
           gallery: imagesList,
           location: "Лиговский проспект, д. 135",
-          schedule: "Открыто с 8:00 до 22:00",
+          schedule: "8:00 - 22:00",
           description:
             "Уютная кофейня с камином, свежеобжаренные зерна из мира, "
             "бариста-искусство. Настоящий домашний комфорт.",
@@ -119,10 +119,10 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
         YandexMapPlacemarkObj(
           placemarkObjId: 2,
 
-          name: "Эклектичный кофеман",
+          name: 'Кофейня "Coffee World"',
           gallery: imagesList,
           location: "Лиговский проспект, д. 119К",
-          schedule: "Открыто с 12:00 до 20:00",
+          schedule: "12:00 - 20:00",
           description:
             "Модная кофейня, оригинальный декор, креативные встречи, "
             "вдохновляющие разговоры.",
@@ -143,7 +143,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
           name: "Райские ароматы",
           gallery: imagesList,
           location: "Лиговский проспект, д. 121",
-          schedule: "Открыто с 10:00 до 23:00",
+          schedule: "10:00 - 23:00",
           description:
             "Оазис релаксации, элегантный интерьер, премиальный кофе, "
             "свежие десерты, моменты блаженства.",
@@ -186,6 +186,15 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
     return Stack(
       children: [
         yandexMap,
+
+        Positioned(
+          top: 10,
+          left: 10,
+          child: IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: _openDrawer,
+          ),
+        ),
 
         if (isInfoVisible)
           Positioned(
@@ -230,5 +239,9 @@ class _YandexMapWidgetState extends State<YandexMapWidget> {
         // )
       ],
     );
+  }
+
+  void _openDrawer() {
+    Scaffold.of(context).openDrawer();
   }
 }

@@ -26,78 +26,99 @@ class PlacemarkInformation {
           ),
         ),
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.5,
+        // height: MediaQuery.of(context).size.height * 0.35,
         padding: EdgeInsets.all(adaptiveSize(context, 20.0)),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Object Name
-              Text(
-                selectedPlacemark.name,
-                style: TextStyle(
-                    fontSize: adaptiveSize(context, 24.0),
-                    fontWeight: FontWeight.bold
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          selectedPlacemark.name,
+                          style: TextStyle(
+                              fontSize: adaptiveSize(context, 20.0),
+                              fontWeight: FontWeight.w800
+                          ),
+                        ),
+
+                        GestureDetector(
+                          onLongPress: () {
+                            Clipboard.setData(ClipboardData(
+                              text: selectedPlacemark.location
+                            ));
+                          },
+                          child: Text(
+                            '• ' + selectedPlacemark.location,
+                            style: TextStyle(
+                              fontSize: adaptiveSize(context, 12.0),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ]
+                    )
+                  ),
+
+                  Spacer(),
+
+                  Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            "Время работы:",
+                            style: TextStyle(
+                                fontSize: adaptiveSize(context, 12.0),
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+                          Text(
+                            selectedPlacemark.schedule,
+                            style: TextStyle(
+                                fontSize: adaptiveSize(context, 12.0),
+                                fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ]
+                      )
+                  ),
+                ],
               ),
-              SizedBox(height: adaptiveSize(context, 16.0)),
-              // ---
+
+              SizedBox(height: adaptiveSize(context, 20.0)),
 
               // Images Gallery
               Container(
-                height: adaptiveSize(context, 120.0),
+                height: ((MediaQuery.of(context).size.width - adaptiveSize(context, 40.0)) / 3 - adaptiveSize(context, 15.0)) / 4 * 5,
+                // padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: selectedPlacemark.gallery.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: adaptiveSize(context, 10.0)),
-                      child: Image.network(selectedPlacemark.gallery[index]),
+                    return Container(
+                      padding: EdgeInsets.symmetric(horizontal: adaptiveSize(context, 7.5)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0)),
+                        child: AspectRatio(
+                          aspectRatio: 4 / 5,
+                          child: Image.network(
+                            selectedPlacemark.gallery[index],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     );
                   },
                 ),
               ),
-              SizedBox(height: adaptiveSize(context, 16.0)),
-              // ---
 
-              // Object Location
-              GestureDetector(
-                onLongPress: () {
-                  Clipboard.setData(ClipboardData(
-                      text: ''
-                  ));
-                },
-                child: Text(
-                  selectedPlacemark.location,
-                  style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: adaptiveSize(context, 16.0)
-                  ),
-                ),
-              ),
-              // ---
-
-              // Schedule
-              SizedBox(height: adaptiveSize(context, 16.0)),
-              Text(
-                selectedPlacemark.schedule,
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: adaptiveSize(context, 16.0)
-                ),
-              ),
-              // ---
-
-              // Description
-              SizedBox(height: adaptiveSize(context, 16.0)),
-              Text(
-                selectedPlacemark.description,
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: adaptiveSize(context, 16.0)
-                ),
-              ),
-              // ---
+              SizedBox(height: adaptiveSize(context, 10.0)),
             ],
           ),
         ),

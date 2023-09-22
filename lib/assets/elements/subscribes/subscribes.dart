@@ -434,7 +434,7 @@ List<Widget> buildSubscribeContainers(
 }
 
 
-class SubscibesPage extends StatelessWidget {
+class SubscribePage extends StatelessWidget {
   final ValueNotifier<bool> isSwitchedNotifier = ValueNotifier<bool>(true);
 
   final positionNotifierFirst = ValueNotifier<SwitchState>(userSubStatusList[0]);
@@ -505,7 +505,7 @@ class SubscibesPage extends StatelessWidget {
                           child: IconButton(
                             icon: Icon(Icons.close),
                             onPressed: () {
-                              // Добавьте здесь код для закрытия страницы профиля
+                              Navigator.of(context).pushReplacementNamed('/home');
                             },
                           ),
                         )
