@@ -5,7 +5,7 @@ class YandexMapPlacemarkObj {
   final int placemarkObjId;
 
   final String name;
-  final List<String> gallery;
+  final List<List<String>> gallery;
   final String location;
   final String schedule;
   final String description;
