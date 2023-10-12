@@ -4,6 +4,8 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 class YandexMapPlacemarkObj {
   final int placemarkObjId;
 
+  final int placemarkLevel;
+
   final String name;
   final List<List<String>> gallery;
   final String location;
@@ -17,6 +19,8 @@ class YandexMapPlacemarkObj {
 
   YandexMapPlacemarkObj({
     required this.placemarkObjId,
+
+    required this.placemarkLevel,
 
     required this.name,
     required this.gallery,

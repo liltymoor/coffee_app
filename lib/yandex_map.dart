@@ -1,6 +1,10 @@
 import 'package:coffee_app/assets/constants/color_scheme.dart';
+
+import 'package:geolocator/geolocator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 export 'package:yandex_mapkit/yandex_mapkit.dart';
 
@@ -41,6 +45,48 @@ class CameraObject {
   }
 }
 
+class CustomPopupMenu extends StatelessWidget {
+  final VoidCallback onClose;
+
+  CustomPopupMenu({required this.onClose});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      type: MaterialType.transparency, // добавьте этот тип материала, чтобы убрать стандартный фон и эффекты нажатия
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: AppColor.backgroundColor,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 4,
+              color: Colors.black26,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(3, (index) {
+            return Row(
+              children: [
+                Checkbox(
+                  value: false, // Замените на ваше актуальное значение
+                  onChanged: (bool? isSelected) {
+                    // Ваш обработчик состояния
+                  },
+                ),
+                Text('${index + 1}'),
+              ],
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
 class YandexMapWidget extends StatefulWidget {
   @override
   _YandexMapWidgetState createState() => _YandexMapWidgetState();
@@ -62,7 +108,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
     ['https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg', 'Чай (Зеленый)'],
   ];
 
-  late CameraPosition cameraPosition;
+
   late YandexMapController _mapController;
 
   bool isSheetVisible = false;
@@ -72,25 +118,57 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
   late Animation<Offset> _animation;
 
 
+  late CameraPosition cameraPosition = CameraPosition(
+    target: Point(latitude: 55.751244, longitude: 37.618423),
+    zoom: 14,
+  );
+
   @override
   void initState() {
     super.initState();
+    _getCurrentLocation();
 
-    cameraPosition = const CameraPosition(
-      target: Point(latitude: 55.751244, longitude: 37.618423),
-      zoom: 14,
-    );
+    // cameraPosition = const CameraPosition(
+    //   target: Point(latitude: 55.751244, longitude: 37.618423),
+    //   zoom: 14,
+    // );
 
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
     _animation = Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(_animationController);
+  }
 
+  _getCurrentLocation() {
+    Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best,
+        forceAndroidLocationManager: true)
+        .then((Position position) {
+      setState(() {
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        print('asdasdasdasdad');
+        cameraPosition = CameraPosition(
+          target: Point(latitude: position.latitude, longitude: position.longitude),
+          zoom: 14,
+        );
+        CameraUpdate.newCameraPosition(cameraPosition);
+      });
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   @override
   void dispose() {
+    // overlayEntry?.remove();
     _animationController.dispose();
     super.dispose();
   }
@@ -98,88 +176,75 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     // Placemark Objects
+    final List<YandexMapPlacemarkObj> placeamrksList = [
+      YandexMapPlacemarkObj(
+        placemarkObjId: 1,
+
+        placemarkLevel: 2,
+
+        name: "Ароматное убежище",
+        gallery: imagesList,
+        location: "Лиговский проспект, д. 135",
+        schedule: "8:00 - 22:00",
+        description:
+        "Уютная кофейня с камином, свежеобжаренные зерна из мира, "
+            "бариста-искусство. Настоящий домашний комфорт.",
+
+        placemarkObjPoint: const Point(latitude: 55.75124, longitude: 37.618423),
+        opacity: 0.8,
+        iconPath: 'lib/assets/images/place.png',
+        iconScale: 1,
+      ),
+      YandexMapPlacemarkObj(
+        placemarkObjId: 2,
+
+        placemarkLevel: 1,
+
+        name: 'Кофейня "Coffee World"',
+        gallery: imagesList,
+        location: "Лиговский проспект, д. 119К",
+        schedule: "12:00 - 20:00",
+        description:
+        "Модная кофейня, оригинальный декор, креативные встречи, "
+            "вдохновляющие разговоры.",
+
+        placemarkObjPoint: const Point(latitude: 55.74524, longitude: 37.618423),
+        opacity: 0.8,
+        iconPath: 'lib/assets/images/place.png',
+        iconScale: 1,
+      ),
+      YandexMapPlacemarkObj(
+        placemarkObjId: 3,
+
+        placemarkLevel: 1,
+
+        name: "Райские ароматы",
+        gallery: imagesList,
+        location: "Лиговский проспект, д. 121",
+        schedule: "10:00 - 23:00",
+        description:
+        "Оазис релаксации, элегантный интерьер, премиальный кофе, "
+            "свежие десерты, моменты блаженства.",
+
+        placemarkObjPoint: const Point(latitude: 55.74824, longitude: 37.621423),
+        opacity: 0.8,
+        iconPath: 'lib/assets/images/place.png',
+        iconScale: 1,
+      )
+    ];
+    // ].where((placemark) => currentPlacemarkLevels.contains(placemark.placemarkLevel)).toList();
+
     final yandexMapService = YandexMapService(
-      placemarkObjects: [
-        YandexMapPlacemarkObj(
-          placemarkObjId: 1,
-
-          name: "Ароматное убежище",
-          gallery: imagesList,
-          location: "Лиговский проспект, д. 135",
-          schedule: "8:00 - 22:00",
-          description:
-          "Уютная кофейня с камином, свежеобжаренные зерна из мира, "
-              "бариста-искусство. Настоящий домашний комфорт.",
-
-          placemarkObjPoint: const Point(latitude: 55.75124, longitude: 37.618423),
-          opacity: 0.8,
-          iconPath: 'lib/assets/images/place.png',
-          iconScale: 1,
-        ).createPlacemark((placemarkObj) {
-          setState(() {
-            selectedPlacemark = placemarkObj;
-            isInfoVisible = true;
-            wasPlacemarkTapped = true;
-            _animationController.forward();
-          });
-          // showPlacemarkInfo(context);
-        }),
-        YandexMapPlacemarkObj(
-          placemarkObjId: 2,
-
-          name: 'Кофейня "Coffee World"',
-          gallery: imagesList,
-          location: "Лиговский проспект, д. 119К",
-          schedule: "12:00 - 20:00",
-          description:
-          "Модная кофейня, оригинальный декор, креативные встречи, "
-              "вдохновляющие разговоры.",
-
-          placemarkObjPoint: const Point(latitude: 55.74524, longitude: 37.618423),
-          opacity: 0.8,
-          iconPath: 'lib/assets/images/place.png',
-          iconScale: 1,
-        ).createPlacemark((placemarkObj) {
-          setState(() {
-            selectedPlacemark = placemarkObj;
-            isInfoVisible = true;
-            wasPlacemarkTapped = true;
-            _animationController.forward();
-          });
-          // showPlacemarkInfo(context);
-        }),
-        YandexMapPlacemarkObj(
-          placemarkObjId: 3,
-
-          name: "Райские ароматы",
-          gallery: imagesList,
-          location: "Лиговский проспект, д. 121",
-          schedule: "10:00 - 23:00",
-          description:
-          "Оазис релаксации, элегантный интерьер, премиальный кофе, "
-              "свежие десерты, моменты блаженства.",
-
-          placemarkObjPoint: const Point(latitude: 55.74824, longitude: 37.621423),
-          opacity: 0.8,
-          iconPath: 'lib/assets/images/place.png',
-          iconScale: 1,
-        ).createPlacemark((placemarkObj) {
-          setState(() {
-            selectedPlacemark = placemarkObj;
-            isInfoVisible = true;
-            wasPlacemarkTapped = true;
-            _animationController.forward();
-          });
-          // showPlacemarkInfo(context);
-        }),
-      ],
+      placemarkObjects: placeamrksList.map((placemark) =>
+          placemark.createPlacemark((placemarkObj) {
+            setState(() {
+              selectedPlacemark = placemarkObj;
+              isInfoVisible = true;
+              wasPlacemarkTapped = true;
+              _animationController.forward();
+            });
+          })).toList()
     );
-
-    // Camera Position
-    final cameraPosition = CameraObject(
-      cameraObjPoint: const Point(latitude: 55.751244, longitude: 37.618423),
-      zoom: 14,
-    ).createCamera();
 
     YandexMap yandexMap = YandexMap(
       onMapCreated: (YandexMapController yandexMapController) {
@@ -246,7 +311,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
                 },
                 child: Container(
                   height: adaptiveSize(context, 50.0),
-                  width: adaptiveSize(context, 140.0),
+                  width: adaptiveSize(context, 110.0),
                   padding: EdgeInsets.symmetric(
                     vertical: adaptiveSize(context, 10.0),
                     horizontal: adaptiveSize(context, 15.0),
@@ -261,7 +326,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
                       'ОФОРМИ\nПОДПИСКУ',
                       textAlign: TextAlign.right,  // Текст также выравнивается по правому краю
                       style: TextStyle(
-                        fontSize: adaptiveSize(context, 16.0),
+                        fontSize: adaptiveSize(context, 12.0),
                         fontWeight: FontWeight.w700,
                         color: Colors.black,
                         height: 1,
@@ -279,7 +344,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
                 },
                 child:Container(
                   height: adaptiveSize(context, 50.0),
-                  width: adaptiveSize(context, 140.0),
+                  width: adaptiveSize(context, 110.0),
                   padding: EdgeInsets.symmetric(
                     vertical: adaptiveSize(context, 10.0),
                     horizontal: adaptiveSize(context, 15.0),
@@ -294,7 +359,7 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
                       'ПОЛУЧИ\nБОНУСЫ',
                       textAlign: TextAlign.right,  // Текст также выравнивается по правому краю
                       style: TextStyle(
-                        fontSize: adaptiveSize(context, 16.0),
+                        fontSize: adaptiveSize(context, 12.0),
                         fontWeight: FontWeight.w700,
                         color: Colors.black,
                         height: 1,
@@ -306,19 +371,14 @@ class _YandexMapWidgetState extends State<YandexMapWidget> with TickerProviderSt
 
               Spacer(),
 
-              Container(
-                padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
-                decoration: BoxDecoration(
-                  color: AppColor.figmaColorLight,
-                  borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0)),
-                ),
-                child: InkWell(
-                    onTap: () {
-
-                    },
-                    child: Icon(Icons.filter_alt_rounded)
-                ),
-              ),
+              // IconButton(
+              //   icon: Icon(Icons.filter_alt_rounded),
+              //   onPressed: () {
+              //     final RenderBox renderBox = context.findRenderObject() as RenderBox;
+              //     final offset = renderBox.localToGlobal(Offset.zero);
+              //     _showMenu(context, offset);
+              //   },
+              // ),
             ],
           )
         ),

@@ -52,12 +52,6 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext scaffoldContext) => Scaffold(
             // appBar: AppBar(title: const Text('Yandex Maps Example')),
             body: YandexMapWidget(),
-            // body: ProfilePage(),
-            // body: DocumentsPage(),
-            // body: PaymentMethodsPage(),
-            // body: BonusesPage(),
-            // body: SubscibePage(),
-
 
             drawer: ClipRRect(
               borderRadius: BorderRadius.only(
@@ -66,193 +60,196 @@ class MyApp extends StatelessWidget {
               ),
               child: Drawer(
                 width: MediaQuery.of(scaffoldContext).size.width * 0.75,
-                child: ListView(
-                  padding: EdgeInsets.all(adaptiveSize(context, 20.0)),
-                  children: <Widget>[
-                    SizedBox(height: adaptiveSize(context, 30.0)),
+                child: Container(
+                  color: AppColor.backgroundColor,
+                  child: ListView(
+                    padding: EdgeInsets.all(adaptiveSize(context, 20.0)),
+                    children: <Widget>[
+                      SizedBox(height: adaptiveSize(context, 30.0)),
 
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        '+7 987 654 32 10',
-                        style: TextStyle(
-                          fontSize: adaptiveSize(context, 20.0),
-                          fontWeight: FontWeight.w800,
+                      Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          '+7 987 654 32 10',
+                          style: TextStyle(
+                            fontSize: adaptiveSize(context, 20.0),
+                            fontWeight: FontWeight.w800,
+                          ),
+                          textAlign: TextAlign.right,
                         ),
-                        textAlign: TextAlign.right,
                       ),
-                    ),
 
-                    SizedBox(height: adaptiveSize(context, 30.0)),
+                      SizedBox(height: adaptiveSize(context, 30.0)),
 
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(scaffoldContext).pushNamed('/profile');
-                      },
-                      child: Container(
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(scaffoldContext).pushNamed('/profile');
+                        },
+                        child: Container(
+                            padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
+                            decoration: BoxDecoration(
+                              color: AppColor.figmaColorLight,
+                              borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'lib/assets/images/profile.png',
+                                width: adaptiveSize(context, 30.0),
+                                height: adaptiveSize(context, 30.0),
+                              ),
+
+                              SizedBox(width: adaptiveSize(context, 10.0)),
+
+                              Text(
+                                'Профиль',
+                                style: TextStyle(
+                                  fontSize: adaptiveSize(context, 17.0),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: adaptiveSize(context, 20.0)),
+
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(scaffoldContext).pushNamed('/payment');
+                        },
+                        child: Container(
                           padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
                           decoration: BoxDecoration(
-                            color: AppColor.figmaColorLight,
-                            borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'lib/assets/images/profile.png',
-                              width: adaptiveSize(context, 30.0),
-                              height: adaptiveSize(context, 30.0),
-                            ),
-
-                            SizedBox(width: adaptiveSize(context, 10.0)),
-
-                            Text(
-                              'Профиль',
-                              style: TextStyle(
-                                fontSize: adaptiveSize(context, 17.0),
-                                fontWeight: FontWeight.w700,
+                              color: AppColor.figmaColorLight,
+                              borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'lib/assets/images/payment.png',
+                                width: adaptiveSize(context, 30.0),
+                                height: adaptiveSize(context, 30.0),
                               ),
-                            ),
-                          ],
+
+                              SizedBox(width: adaptiveSize(context, 10.0)),
+
+                              Text(
+                                'Способы оплаты',
+                                style: TextStyle(
+                                  fontSize: adaptiveSize(context, 17.0),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
 
-                    SizedBox(height: adaptiveSize(context, 20.0)),
+                      SizedBox(height: adaptiveSize(context, 20.0)),
 
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(scaffoldContext).pushNamed('/payment');
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
-                        decoration: BoxDecoration(
-                            color: AppColor.figmaColorLight,
-                            borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'lib/assets/images/payment.png',
-                              width: adaptiveSize(context, 30.0),
-                              height: adaptiveSize(context, 30.0),
-                            ),
-
-                            SizedBox(width: adaptiveSize(context, 10.0)),
-
-                            Text(
-                              'Способы оплаты',
-                              style: TextStyle(
-                                fontSize: adaptiveSize(context, 17.0),
-                                fontWeight: FontWeight.w700,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(scaffoldContext).pushNamed('/subscribe');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
+                          decoration: BoxDecoration(
+                              color: AppColor.figmaColorLight,
+                              borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'lib/assets/images/subscribe.png',
+                                width: adaptiveSize(context, 30.0),
+                                height: adaptiveSize(context, 30.0),
                               ),
-                            ),
-                          ],
+
+                              SizedBox(width: adaptiveSize(context, 10.0)),
+
+                              Text(
+                                'Подписка',
+                                style: TextStyle(
+                                  fontSize: adaptiveSize(context, 17.0),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
 
-                    SizedBox(height: adaptiveSize(context, 20.0)),
+                      SizedBox(height: adaptiveSize(context, 20.0)),
 
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(scaffoldContext).pushNamed('/subscribe');
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
-                        decoration: BoxDecoration(
-                            color: AppColor.figmaColorLight,
-                            borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'lib/assets/images/subscribe.png',
-                              width: adaptiveSize(context, 30.0),
-                              height: adaptiveSize(context, 30.0),
-                            ),
-
-                            SizedBox(width: adaptiveSize(context, 10.0)),
-
-                            Text(
-                              'Подписка',
-                              style: TextStyle(
-                                fontSize: adaptiveSize(context, 17.0),
-                                fontWeight: FontWeight.w700,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(scaffoldContext).pushNamed('/bonuses');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
+                          decoration: BoxDecoration(
+                              color: AppColor.figmaColorLight,
+                              borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'lib/assets/images/star.png',
+                                width: adaptiveSize(context, 30.0),
+                                height: adaptiveSize(context, 30.0),
                               ),
-                            ),
-                          ],
+
+                              SizedBox(width: adaptiveSize(context, 10.0)),
+
+                              Text(
+                                'Бонусы',
+                                style: TextStyle(
+                                  fontSize: adaptiveSize(context, 17.0),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
 
-                    SizedBox(height: adaptiveSize(context, 20.0)),
+                      SizedBox(height: adaptiveSize(context, 20.0)),
 
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(scaffoldContext).pushNamed('/bonuses');
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
-                        decoration: BoxDecoration(
-                            color: AppColor.figmaColorLight,
-                            borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'lib/assets/images/star.png',
-                              width: adaptiveSize(context, 30.0),
-                              height: adaptiveSize(context, 30.0),
-                            ),
-
-                            SizedBox(width: adaptiveSize(context, 10.0)),
-
-                            Text(
-                              'Бонусы',
-                              style: TextStyle(
-                                fontSize: adaptiveSize(context, 17.0),
-                                fontWeight: FontWeight.w700,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(scaffoldContext).pushNamed('/documents');
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
+                          decoration: BoxDecoration(
+                              color: AppColor.figmaColorLight,
+                              borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'lib/assets/images/documents.png',
+                                width: adaptiveSize(context, 30.0),
+                                height: adaptiveSize(context, 30.0),
                               ),
-                            ),
-                          ],
+
+                              SizedBox(width: adaptiveSize(context, 10.0)),
+
+                              Text(
+                                'Документы',
+                                style: TextStyle(
+                                  fontSize: adaptiveSize(context, 17.0),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-
-                    SizedBox(height: adaptiveSize(context, 20.0)),
-
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(scaffoldContext).pushNamed('/documents');
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(adaptiveSize(context, 10.0)),
-                        decoration: BoxDecoration(
-                            color: AppColor.figmaColorLight,
-                            borderRadius: BorderRadius.circular(adaptiveSize(context, 10.0))
-                        ),
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'lib/assets/images/documents.png',
-                              width: adaptiveSize(context, 30.0),
-                              height: adaptiveSize(context, 30.0),
-                            ),
-
-                            SizedBox(width: adaptiveSize(context, 10.0)),
-
-                            Text(
-                              'Документы',
-                              style: TextStyle(
-                                fontSize: adaptiveSize(context, 17.0),
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
